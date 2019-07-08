@@ -1,0 +1,17 @@
+{
+  "name": "composr-server",
+  "version": "0.0.1",
+  "description": "API for Composr",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/koa": "^2.0.49",
+    "koa": "^2.7.0",
+    "parcel": "^1.12.3",
+    "typescript": "^3.5.2"
+  }
+}
