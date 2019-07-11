@@ -16,5 +16,9 @@
     "parcel": "^1.12.3",
     "pm2": "^3.5.1",
     "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^1.2.2",
+    "python": "0.0.4"
   }
 }
