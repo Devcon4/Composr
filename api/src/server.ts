@@ -1,14 +1,9 @@
 import Koa from 'koa';
-import Router from 'koa-router';
+import { ioc } from "./ioc";
+
 const app = new Koa();
-
-const router = new Router();
-
-router.get('/test', ctx => {
-  ctx.body = 'Test!';
-});
-
-app.use(router.routes());
-app.use(router.allowedMethods());
+ioc.init();
+app.use(ioc.router.routes());
+app.use(ioc.router.allowedMethods());
 
 app.listen(3000);
