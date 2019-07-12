@@ -6,6 +6,17 @@ html, body {
 
 * {
   font-family: 'Lato', sans-serif;
+  --white: #FFFFFF;
+  --primary-button: #058B25;
+  --pattern-button: #DB8828;
+  --create-button: #058B25;
+  --create-button-hover: #024d13;
+  --create-button-disabled: #058B2570;
+  --create-button-text-hover: #e7e7e7;
+  --light-grey: #DADADB;
+  --dark-grey: #00000060;
+  --primary-background: #000000;
+  --pattern-background: #EBB50E;
 }
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";

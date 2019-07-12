@@ -1,17 +1,31 @@
 <div class="container">
   <div class="overlay">
     <h1>Composr</h1>
-    <h2>Enhanced images made by</h2>
-    <h2>Deep Thinking patterning.</h2>
+    <h2>Stylized image using</h2>
+    <h2>Deep Learing.</h2>
+  </div>
+  <div class="overlay2">
+    <app-uploader (newPrimaryPhoto)="setPrimaryPhoto($event)" (newPatternPhoto)="setPatternPhoto($event)"></app-uploader>
   </div>
   <div id="cf">
     <div class="images bottom">
-      <img src="../../assets/woman.png" alt="Avatar" class="image-left">
-      <img src="../../assets/plant.png" alt="Stlye" class="image-right">
+      <div class="left-image-wrapper">
+        <img *ngIf="!this.primaryPhoto" src="../../assets/woman.png" alt="Avatar" class="image-left">
+        <img *ngIf="primaryPhoto" [src]="primaryPhoto" alt="Avatar" class="image-left">
+      </div>
+      <div class="right-image-wrapper">
+        <img *ngIf="!this.patternPhoto" src="../../assets/plant.png" alt="Stlye" class="image-right">
+        <img *ngIf="patternPhoto" [src]="patternPhoto" alt="Avatar" class="image-right">
+      </div>
     </div>
     <div class="images top">
-      <img src="../../assets/man.png" alt="Avatar" class="image-left">
-      <img src="../../assets/fireworks.png" alt="Stlye" class="image-right">
+      <div class="left-image-wrapper">
+      <img *ngIf="!this.primaryPhoto" src="../../assets/man.png" alt="Avatar" class="image-left">
+      <img *ngIf="primaryPhoto" [src]="primaryPhoto" alt="Avatar" class="image-left">
+    </div>
+    <div class="right-image-wrapper">
+      <img *ngIf="!this.patternPhoto" src="../../assets/fireworks.png" alt="Stlye" class="image-right">
+      <img *ngIf="patternPhoto" [src]="patternPhoto" alt="Avatar" class="image-right">
     </div>
   </div>
 </div>
