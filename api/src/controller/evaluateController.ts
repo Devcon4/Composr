@@ -4,7 +4,7 @@ import { Response } from "node-fetch";
 
 export class EvaluateController implements IController {
     constructor() {
-        ioc.router.get('/evaluate', ctx => {
+        ioc.router.get('/composr/api/evaluate', ctx => {
             ctx.body = 'Test eval!';
         });
     }
