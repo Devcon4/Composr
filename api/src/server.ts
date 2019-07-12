@@ -1,4 +1,4 @@
-import Koa from 'koa';
+import * as Koa from 'koa';
 import { ioc } from "./ioc";
 
 const app = new Koa();

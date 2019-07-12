@@ -4,3 +4,6 @@
 /api/.cache
 /api/dist/server.js
 /api/dist/server.js.map
+/api/data/vgg.h5
+/api/data/vgg19.npy
+/.vscode

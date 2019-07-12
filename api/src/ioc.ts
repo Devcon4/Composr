@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 import { EvaluateController } from './controller/evaluateController';
 import { IController } from './controller/iController';
 import { DefinitionService } from './service/definitionService';

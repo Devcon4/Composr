@@ -12,4 +12,6 @@ model = VGG19(include_top=True, weights='imagenet', input_tensor=None, input_sha
 #     overwrite=True,
 # )
 
+model.
+
 tfjs.converters.save_keras_model(model, "./vgg.json")
