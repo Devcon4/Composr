@@ -1,0 +1,20 @@
+<div class="uploader">
+  <div class="uploader-title">
+    Add your photos
+  </div>
+  <div class="upload-buttons">
+    <input type="file" accept="image/*" #primary multiple class="file-input" style="display:none" autocomplete="off" (change)="uploadPrimary($event)">
+    <button class="primary-button" (click)="primary.click()"><span *ngIf="!primaryPhoto">Upload Primary</span><span *ngIf="primaryPhoto">Replace Primary</span></button>
+    <input type="file" accept="image/*" #pattern class="file-input" style="display:none" autocomplete="off" (change)="uploadPattern($event)">
+    <button class="pattern-button" (click)="pattern.click()"><span *ngIf="!patternPhoto">Upload Pattern</span><span *ngIf="patternPhoto">Replace Pattern</span></button>
+  </div>
+  <div class="remove-photos">
+    <button class="remove-photos-button" (click)="removePhotos()">
+      Remove photos
+    </button>
+  </div>
+  <div class="divider"></div>
+  <div class="create-button-wrapper">
+    <button class="create-button" (click)="processPhotos()" [disabled]="!primaryPhoto || !patternPhoto">Create Image</button>
+  </div>
+</div>

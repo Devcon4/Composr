@@ -1,0 +1,125 @@
+.uploader {
+  padding: 20px;
+  background-color: var(--white);
+  align-content: center;
+}
+
+.uploader-title {
+  padding: 30px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+}
+
+.upload-buttons {
+  display: flex;
+}
+
+.primary-button {
+  color: var(--primary-button);
+  background-color: inherit;
+  border: solid 2px var(--primary-button);
+  border-right-width: 1px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 8px 15px;
+  font-weight: bold;
+
+  transition: all 250ms linear;
+
+}
+
+.primary-button:focus,.primary-button:hover {
+  background-color: var(--primary-button);
+  outline-color: var(--primary-button);
+  color: var(--white);
+}
+
+.pattern-button {
+  color: var(--pattern-button);
+  background-color: inherit;
+  border: solid 2px var(--pattern-button);
+  border-left-width: 1px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 8px 15px;
+  font-weight: bold;
+
+  transition: all 250ms linear;
+}
+
+.pattern-button:focus,.pattern-button:hover {
+  background-color: var(--pattern-button);
+  outline-color: var(--pattern-button);
+  color: var(--white);
+}
+
+.remove-photos {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.remove-photos-button {
+  color: var(--dark-grey);
+  background-color: inherit;
+  border: solid 2px var(--white);
+  border-radius: 3px;
+  padding: 8px 25px;
+  font-weight: bold;
+
+  transition: all 250ms linear;
+}
+
+.remove-photos-button:focus,.remove-photos-button:hover {
+  /* background-color: var(--dark-grey); */
+  border: solid 2px var(--dark-grey);
+  outline-color: var(--dark-grey);
+  /* color: var(--white); */
+}
+
+.divider {
+  border: solid 1px var(--light-grey);
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: calc(100% + 38px);
+  margin-left: -20px;
+}
+
+.create-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.create-button {
+  color: var(--white);
+  background-color: var(--create-button);
+  border: none;
+  border-radius: 3px;
+  padding: 8px 25px;
+  font-weight: bold;
+
+  transition: all 250ms linear;
+}
+
+.create-button:focus,.create-button:hover {
+  background-color: var(--create-button-hover);
+  outline-color: var(--create-button-hover);
+  color: var(--create-button-text-hover);
+}
+
+.create-button:disabled {
+  background-color: var(--create-button-disabled);
+  outline-color: var(--create-button-disabled);
+  color: var(--create-button-text-hover);
+  cursor: default;
+}
+
+.file-input {
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
