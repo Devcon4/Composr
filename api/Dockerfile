@@ -23,10 +23,7 @@ EXPOSE 3000
 CMD ["pm2-runtime", "eco.prod.json", "--only", "composr"]
 
 # Build image
-# docker build -t <your username>/composr .
-
-# Run image
-# docker run -p 49160:8080 -d <your username>/composr
+# docker build -t <your username>/composr-api .
 
 # Push to repo
 # docker tag local-image:tagname new-repo:tagname
