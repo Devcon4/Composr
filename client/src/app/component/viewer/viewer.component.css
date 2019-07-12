@@ -11,37 +11,68 @@
 /* Make the image to responsive */
 .images {
   display: flex;
+  height: 100%;
 }
 
 .image-left,
 .image-right {
-  width: 50%;
+  max-height: 90%;
+  max-width: 90%
+}
+
+.left-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
+  width: 50%;
+  background-color: var(--primary-background);
+}
+
+.right-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+  background-color: var(--pattern-background);
 }
 
 /* The overlay effect - lays on top of the container and over the image */
 .overlay {
   position: absolute;
   top: 0;
-  color: #f1f1f1;
+  color: var(--white);
   width: 100%;
-  padding: 20px;
+  padding: 25px;
   z-index: 10;
 }
 
-
-#cf {
-  position: relative;
-  margin: 0 auto;
+.overlay2 {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  z-index: 10;
 }
 
-#cf div {
+ #cf {
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+}
+
+#cf .top, #cf .bottom{
   position:absolute;
   left:0;
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
   -o-transition: opacity 1s ease-in-out;
   transition: opacity 1s ease-in-out;
+  width: 100%
 }
 
 @keyframes cfFadeInOut {
