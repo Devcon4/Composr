@@ -1,11 +1,9 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-!pip install -q tensorflow-gpu==2.0.0-beta1
 import tensorflow as tf
 
-import IPython.display as display
-
-import matplotlib.pyplot as pyplotimport matplotlib as mpl
+import matplotlib.pyplot as pyplot
+import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = (12, 12)
 mpl.rcParams['axes.grid'] = False
 
@@ -22,7 +20,7 @@ def load_img(path_to_img):
     max_dim = 512
     img = tf.io.read_file(path_to_img)
     img = tf.image.decode_image(img, channels=3)
-    img = tf.image.convert_image_dtype(img, tf.flaot32)
+    img = tf.image.convert_image_dtype(img, tf.float32)
 
     shape = tf.cast(tf.shape(img)[:-1], tf.float32)
     long_dim = max(shape)
@@ -38,22 +36,8 @@ def imshow(image, title=None):
     if len(image.shape) > 3:
         image = tf.squeeze(image, axis=0)
 
-    plt.imshow(image)
-    if title:
-        plt.title(title)
-
-    content_image = load_img(content_path)
-    style_image = load_img(style_path)
-
-    plt.subplot(1, 2, 1)
-    imshow(content_image, 'Content Image')
-
-    plt.subplot(1, 2, 2)
-    imshow(style_image, 'Style Image')
-
-x = tf.keras.applications.vgg19.preprocess_input(content_image*255)
-x = tf.image.resize(x, (224, 224))
-vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+content_image = load_img(content_path)
+style_image = load_img(style_path)
 
 content_layers = ['block5_conv2']
 
@@ -78,10 +62,10 @@ def vgg_layers(layer_names):
 
 # There are several feature maps in the model graph, together they define the style of an image. a Gram Matrix is the best way to get this correlation
 def gram_matrix(input_tensor):
-    result = tf.linalg.einsum('bijx, bijd->bcd', input_tensor, input_tensor)
+    result = tf.linalg.einsum('bijc,bijd->bcd', input_tensor, input_tensor)
     input_shape = tf.shape(input_tensor)
     num_locations = tf.cast(input_shape[1] * input_shape[2], tf.float32)
-    return results/(num_locations)
+    return result/(num_locations)
 
 # Figure out the styles/content of an image.
 class StyleContentModel(tf.keras.models.Model):
@@ -113,7 +97,7 @@ extractor = StyleContentModel(style_layers, content_layers)
 style_targets = extractor(style_image)['style']
 content_targets = extractor(content_image)['content']
 
-image = tf.Variable(content_iamge)
+image = tf.Variable(content_image)
 
 def clip_0_1(image):
     return tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
@@ -126,23 +110,32 @@ content_weight=1e4
 def style_content_loss(outputs):
     style_outputs = outputs['style']
     content_outputs = outputs['content']
-    style_loss = tf.add_n([tf.reduce_mean((style_outputs[name]-style_targets[name])**2) for name in style_outputs.keys()])
+    style_loss = tf.add_n([tf.reduce_mean((style_outputs[name]-style_targets[name])**2) 
+                           for name in style_outputs.keys()])
     style_loss *= style_weight / num_style_layers
 
-    content_loss = tf.add_n([tf.reduce_mean((content_outputs[name]-content_targets[name])**2) for name in content_outputs.keys()])
+    content_loss = tf.add_n([tf.reduce_mean((content_outputs[name]-content_targets[name])**2) 
+                             for name in content_outputs.keys()])
     content_loss *= content_weight / num_content_layers
     loss = style_loss + content_loss
     return loss
 
+def total_variation_loss(image):
+    x_deltas, y_deltas = high_pass_x_y(image)
+    return tf.reduce_mean(x_deltas**2) + tf.reduce_mean(y_deltas**2)
+
+total_variation_weight=1e8
+
 @tf.function()
 def train_step(image):
-    with tf.GradientTape() as tape:
-        outputs = extractor(image)
-        loss = style_content_loss(outputs)
+  with tf.GradientTape() as tape:
+    outputs = extractor(image)
+    loss = style_content_loss(outputs)
+    loss += total_variation_weight*total_variation_loss(image)
 
-    grad = tape.gradient(loss, image)
-    opt.apply_gradients([(grad, image)])
-    image.assign(clip_0_1(image))
+  grad = tape.gradient(loss, image)
+  opt.apply_gradients([(grad, image)])
+  image.assign(clip_0_1(image))
 
 def high_pass_x_y(image):
     x_var = image[:,:,1:,:] - image[:,:,:-1,:]
@@ -150,11 +143,42 @@ def high_pass_x_y(image):
 
     return x_var, y_var
 
+import time
+start = time.time()
+
+# epochs = 10
+# steps_per_epoch = 100
+
+# step = 0
+# for n in range(epochs):
+#   for m in range(steps_per_epoch):
+#     step += 1
+#     train_step(image)
+#     print(".", end='')
+#   display.clear_output(wait=True)
+#   imshow(image.read_value())
+
 train_step(image)
 train_step(image)
 train_step(image)
-plt.imshow(image.read_value()[0])
+train_step(image)
+train_step(image)
+
+imshow(image.read_value())
+
+end = time.time()
+print("Total time: {:.1f}".format(end-start))
+print(image.read_value()[0])
+
+# from scripy.misc import imsave
+# imsave("turtle.png", image[0])
 
 file_name = 'kadinsky-turtle.png'
 mpl.image.imsave(file_name, image[0])
-files.download(file_name)
+
+try:
+  from google.colab import files
+except ImportError:
+  pass
+else:
+  files.download(file_name)

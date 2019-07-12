@@ -7,3 +7,4 @@
 /api/data/vgg.h5
 /api/data/vgg19.npy
 /.vscode
+/api/data/__pycache__
