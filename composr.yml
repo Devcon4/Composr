@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+
+  web: 
+    image: jheilbut/composr-reverseproxy
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 8084:8084
+    environment:
+      VERSION: latest
+
+  client: 
+    depends_on:
+      - web
+    image: jheilbut/composr-client
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    environment:
+      VERSION: latest
+  
+  api: 
+    depends_on:
+      - web
+    image: jheilbut/composr
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    environment:
+      VERSION: latest
+
+# Run this command in Powershell   
+# docker -H devdocker:2376 stack deploy -c C:\source\doi\composr\composr.yml composr
+# This is a file location on the network for my stuff
+# \\inf-fs01\docker\jeff
+            

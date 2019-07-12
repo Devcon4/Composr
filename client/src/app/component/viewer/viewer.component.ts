@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./viewer.component.css']
 })
 export class ViewerComponent implements OnInit {
+  primaryPhoto = null;
+  patternPhoto = null;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  setPrimaryPhoto(event) {
+    this.primaryPhoto = event;
+  }
+
+  setPatternPhoto(event) {
+    this.patternPhoto = event;
   }
 
 }

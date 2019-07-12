@@ -7,6 +7,7 @@ import { HomeComponent } from './component/home/home.component';
 import { ViewerComponent } from './component/viewer/viewer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material';
+import { UploaderComponent } from './component/uploader/uploader.component';
 
 
 
@@ -14,7 +15,8 @@ import {MatButtonModule} from '@angular/material';
   declarations: [
     AppComponent,
     HomeComponent,
-    ViewerComponent
+    ViewerComponent,
+    UploaderComponent
   ],
   imports: [
     BrowserModule,

@@ -5,11 +5,16 @@ import { HomeComponent } from './component/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'composr/home',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'composr',
+    redirectTo: 'composr/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'composr/home',
     component: HomeComponent,
   }
 ];
