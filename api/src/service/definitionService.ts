@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { IService } from "./IService";
 import { ioc } from "../ioc";
 import * as tf from '@tensorflow/tfjs';
@@ -27,5 +28,8 @@ export class DefinitionService implements IService {
         
         ioc.modelService.model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
     }
+=======
+export class DefinitionService {
+>>>>>>> 99dc85e4248fc68005e6b603b3cdb843463a4ad6
     
 }
