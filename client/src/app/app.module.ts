@@ -8,6 +8,7 @@ import { ViewerComponent } from './component/viewer/viewer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material';
 import { UploaderComponent } from './component/uploader/uploader.component';
+import { UserService } from './service/user.service';
 
 
 
@@ -24,7 +25,7 @@ import { UploaderComponent } from './component/uploader/uploader.component';
     BrowserAnimationsModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

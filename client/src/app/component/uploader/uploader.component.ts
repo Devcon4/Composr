@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-uploader',
@@ -14,7 +16,7 @@ export class UploaderComponent implements OnInit {
   patternPhoto;
 
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -24,9 +26,10 @@ export class UploaderComponent implements OnInit {
       const reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-      reader.onload = (fileReader: any) => { // called once readAsDataURL is completed
+      reader.onload = async (fileReader: any) => { // called once readAsDataURL is completed
         this.primaryPhoto = fileReader.target.result;
         this.newPrimaryPhoto.emit(this.primaryPhoto);
+        this.uploadCall(this.patternPhoto);
       };
     }
   }
@@ -36,12 +39,16 @@ export class UploaderComponent implements OnInit {
       const reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-
       reader.onload = (fileReader: any) => { // called once readAsDataURL is completed
         this.patternPhoto = fileReader.target.result;
         this.newPatternPhoto.emit(this.patternPhoto);
+        this.uploadCall(this.patternPhoto);
       };
     }
+  }
+
+  uploadCall(image: string) {
+    this.httpClient.post('/api/upload', this.primaryPhoto, {responseType: 'json', params: {'sessionId': this.userService.sessionId}}).subscribe();
   }
 
   removePhotos() {
@@ -51,9 +58,10 @@ export class UploaderComponent implements OnInit {
     this.newPatternPhoto.emit(this.patternPhoto);
   }
 
-  processPhotos() {
+  async processPhotos() {
     // do the stuff
     console.log('doing the stuff...' );
+    this.httpClient.get('/api/evaluate')
   }
 
 }
