@@ -1,9 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-<<<<<<< HEAD
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../service/user.service';
-=======
->>>>>>> 99dc85e4248fc68005e6b603b3cdb843463a4ad6
 
 @Component({
   selector: 'app-uploader',
@@ -19,11 +16,7 @@ export class UploaderComponent implements OnInit {
   patternPhoto;
 
 
-<<<<<<< HEAD
   constructor(private httpClient: HttpClient, private userService: UserService) { }
-=======
-  constructor() { }
->>>>>>> 99dc85e4248fc68005e6b603b3cdb843463a4ad6
 
   ngOnInit() {
   }
