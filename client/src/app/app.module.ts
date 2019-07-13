@@ -8,12 +8,7 @@ import { ViewerComponent } from './component/viewer/viewer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material';
 import { UploaderComponent } from './component/uploader/uploader.component';
-<<<<<<< HEAD
 import { UserService } from './service/user.service';
-=======
->>>>>>> 99dc85e4248fc68005e6b603b3cdb843463a4ad6
-
-
 
 @NgModule({
   declarations: [

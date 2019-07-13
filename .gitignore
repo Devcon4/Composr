@@ -1,0 +1,6 @@
+/client/node_modules
+/server/node_modules
+/api/dist
+/api/.cache
+/api/dist/server.js
+/api/dist/server.js.map
