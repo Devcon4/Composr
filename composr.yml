@@ -13,6 +13,17 @@ services:
     environment:
       VERSION: latest
 
+  home: 
+    depends_on:
+      - web 
+    image: yeasy/simple-web
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    environment:
+      VERSION: latest
+
   client: 
     depends_on:
       - web
