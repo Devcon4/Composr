@@ -4,10 +4,13 @@ import { EvaluateController } from './controller/evaluateController';
 import { IController } from './controller/iController';
 import { DefinitionService } from './service/definitionService';
 import { EvaluateService } from './service/evaluateService';
-import { TrainingService } from './service/trainingService';
 import { ModelService } from './service/modelService';
 import { IService } from './service/IService';
-import { DatasetService } from './service/datasetService';
+import { SessionService } from './service/sessionService';
+import { sessionController } from './controller/sessionController';
+import { UploadController } from './controller/uploadController';
+import { ProccessService } from './service/proccessService';
+import { UploadService } from './service/uploadService';
 
 class Ioc {
     public router = new Router();
@@ -16,19 +19,23 @@ class Ioc {
     public modelService = new ModelService();
     public definitionService = new DefinitionService();
     public evaluateService = new EvaluateService();
-    public trainingService = new TrainingService();
-    public datasetService = new DatasetService();
+    public sessionService = new SessionService();
+    public proccessService = new ProccessService();
+    public uploadService = new UploadService();
 
     public services: IService[] = [
         this.modelService,
         this.definitionService,
         this.evaluateService,
-        this.trainingService,
-        this.datasetService
+        this.sessionService,
+        this.proccessService,
+        this.uploadService
     ];
 
     init() {
         this.controllers.push(new EvaluateController());
+        this.controllers.push(new sessionController());
+        this.controllers.push(new UploadController());
         this.services.forEach(s => s.init());
     }
 }

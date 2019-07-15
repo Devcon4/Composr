@@ -10,14 +10,19 @@ mpl.rcParams['axes.grid'] = False
 import numpy as np
 import time
 import functools
+import imageio
+import random
+
+session_hash = random.randrange(32*255)
 
 # https://www.tensorflow.org/beta/tutorials/generative/style_transfer
-
-content_path = tf.keras.utils.get_file('turtle.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Green_Sea_Turtle_grazing_seagrass.jpg')
-style_path = tf.keras.utils.get_file('kandinsky.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
+content_path = tf.keras.utils.get_file('content_{}.jpg'.format(session_hash), 'http://localhost:5000/static.png')
+style_path = tf.keras.utils.get_file('style_{}.jpg'.format(session_hash),'http://localhost:5000/rythme.jpg')
+# content_path = tf.keras.utils.get_file('turtle.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Green_Sea_Turtle_grazing_seagrass.jpg')
+# style_path = tf.keras.utils.get_file('kandinsky.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
 
 def load_img(path_to_img):
-    max_dim = 512
+    max_dim = 256
     img = tf.io.read_file(path_to_img)
     img = tf.image.decode_image(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.float32)
@@ -143,42 +148,46 @@ def high_pass_x_y(image):
 
     return x_var, y_var
 
+def saveImage(filename, image):
+  imageio.imwrite(filename, image)
+
 import time
 start = time.time()
 
-# epochs = 10
-# steps_per_epoch = 100
+epochs = 5
+steps_per_epoch = 1000
 
-# step = 0
-# for n in range(epochs):
-#   for m in range(steps_per_epoch):
-#     step += 1
-#     train_step(image)
-#     print(".", end='')
-#   display.clear_output(wait=True)
-#   imshow(image.read_value())
-
-train_step(image)
-train_step(image)
-train_step(image)
-train_step(image)
-train_step(image)
-
-imshow(image.read_value())
+step = 0
+for n in range(epochs):
+  for m in range(steps_per_epoch):
+    step += 1
+    train_step(image)
+    print("#: {}, T+: {:.1f}".format(step, time.time()-start))
+  print("epoch: {}".format(n))
+  saveImage("run/epoch_{}.png".format(n), image[0])
 
 end = time.time()
 print("Total time: {:.1f}".format(end-start))
-print(image.read_value()[0])
+
+saveImage("run/complete.png", image[0])
+# train_step(image)
+# train_step(image)
+# train_step(image)
+# train_step(image)
+# train_step(image)
+
+# imshow(image.read_value())
+
+
 
 # from scripy.misc import imsave
 # imsave("turtle.png", image[0])
 
-file_name = 'kadinsky-turtle.png'
-mpl.image.imsave(file_name, image[0])
+# mpl.image.imsave(file_name, image.read_value()[0], format='png')
 
-try:
-  from google.colab import files
-except ImportError:
-  pass
-else:
-  files.download(file_name)
+# try:
+#   from google.colab import files
+# except ImportError:
+#   pass
+# else:
+#   files.download(file_name)
