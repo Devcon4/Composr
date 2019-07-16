@@ -16,8 +16,8 @@ import random
 session_hash = random.randrange(32*255)
 
 # https://www.tensorflow.org/beta/tutorials/generative/style_transfer
-content_path = tf.keras.utils.get_file('content_{}.jpg'.format(session_hash), 'http://localhost:5000/man.png')
-style_path = tf.keras.utils.get_file('style_{}.jpg'.format(session_hash),'http://localhost:5000/fireworks.png')
+content_path = tf.keras.utils.get_file('content_{}.jpg'.format(session_hash), 'http://localhost:5000/new_york.jpg')
+style_path = tf.keras.utils.get_file('style_{}.jpg'.format(session_hash),'http://localhost:5000/Starry_Night.jpg')
 # content_path = tf.keras.utils.get_file('turtle.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Green_Sea_Turtle_grazing_seagrass.jpg')
 # style_path = tf.keras.utils.get_file('kandinsky.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
 
@@ -164,12 +164,12 @@ for n in range(epochs):
     train_step(image)
     print("#: {}, T+: {:.1f}".format(step, time.time()-start))
   print("epoch: {}".format(n))
-  saveImage("run/epoch_{}.png".format(n), image[0])
+  saveImage("run3/epoch_{}.png".format(n), image[0])
 
 end = time.time()
 print("Total time: {:.1f}".format(end-start))
 
-saveImage("run/complete.png", image[0])
+saveImage("run3/complete.png", image[0])
 # train_step(image)
 # train_step(image)
 # train_step(image)

@@ -16,13 +16,13 @@ import random
 session_hash = random.randrange(32*255)
 
 # https://www.tensorflow.org/beta/tutorials/generative/style_transfer
-content_path = tf.keras.utils.get_file('content_{}.jpg'.format(session_hash), 'http://localhost:5000/static.png')
-style_path = tf.keras.utils.get_file('style_{}.jpg'.format(session_hash),'http://localhost:5000/rythme.jpg')
+content_path = tf.keras.utils.get_file('content_{}.jpg'.format(session_hash), 'http://localhost:5000/gate.jpg')
+style_path = tf.keras.utils.get_file('style_{}.jpg'.format(session_hash),'http://localhost:5000/crossing.jpg')
 # content_path = tf.keras.utils.get_file('turtle.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Green_Sea_Turtle_grazing_seagrass.jpg')
 # style_path = tf.keras.utils.get_file('kandinsky.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
 
 def load_img(path_to_img):
-    max_dim = 256
+    max_dim = 1024
     img = tf.io.read_file(path_to_img)
     img = tf.image.decode_image(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.float32)
@@ -154,7 +154,7 @@ def saveImage(filename, image):
 import time
 start = time.time()
 
-epochs = 5
+epochs = 10
 steps_per_epoch = 1000
 
 step = 0
@@ -164,12 +164,12 @@ for n in range(epochs):
     train_step(image)
     print("#: {}, T+: {:.1f}".format(step, time.time()-start))
   print("epoch: {}".format(n))
-  saveImage("run/epoch_{}.png".format(n), image[0])
+  saveImage("run2/epoch_{}.png".format(n), image[0])
 
 end = time.time()
 print("Total time: {:.1f}".format(end-start))
 
-saveImage("run/complete.png", image[0])
+saveImage("run2/complete.png", image[0])
 # train_step(image)
 # train_step(image)
 # train_step(image)

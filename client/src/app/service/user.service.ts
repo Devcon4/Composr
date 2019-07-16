@@ -10,6 +10,6 @@ export class UserService {
   public sessionId = uuid();
 
   constructor(private httpClient: HttpClient) {
-    httpClient.post('/api/createSession', this.sessionId).subscribe();
+    httpClient.post('/composr/api/createSession', this.sessionId).subscribe();
   }
 }

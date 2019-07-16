@@ -48,7 +48,7 @@ export class UploaderComponent implements OnInit {
   }
 
   uploadCall(image: string) {
-    this.httpClient.post('/api/upload', this.primaryPhoto, {responseType: 'json', params: {'sessionId': this.userService.sessionId}}).subscribe();
+    this.httpClient.post('/composr/api/upload', this.primaryPhoto, {responseType: 'json', params: {'sessionId': this.userService.sessionId}}).subscribe();
   }
 
   removePhotos() {
@@ -61,7 +61,7 @@ export class UploaderComponent implements OnInit {
   async processPhotos() {
     // do the stuff
     console.log('doing the stuff...' );
-    this.httpClient.get('/api/evaluate')
+    this.httpClient.get('/composr/api/evaluate').subscribe();
   }
 
 }
