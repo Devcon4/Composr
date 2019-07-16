@@ -12,7 +12,7 @@ docker push jheilbut/composr-client:latest
 
 # Build reverse proxy docker image
 cd ..
-docker build -t jheilbut/composr-reverseproxy
+docker build -t jheilbut/composr-reverseproxy .
 docker tag jheilbut/composr-reverseproxy:latest jheilbut/composr-reverseproxy:latest
 docker push jheilbut/composr-reverseproxy:latest
 
