@@ -17,4 +17,4 @@ docker tag jheilbut/composr-reverseproxy:latest jheilbut/composr-reverseproxy:la
 docker push jheilbut/composr-reverseproxy:latest
 
 # Deploy to jeff.cen.centeva.com/composr
-docker -H devdocker:2376 stack deploy -c composr.yml jeff
+docker -H devdocker.cen.centeva.com:2376 stack deploy -c composr.yml jeff
