@@ -17,7 +17,7 @@
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "parcel": "^1.12.3",
-    "pm2": "^3.5.1",
+    "pm2": "^5.2.2",
     "python-shell": "^1.0.7",
     "tfjs-npy": "0.0.3",
     "typescript": "^3.5.2",
